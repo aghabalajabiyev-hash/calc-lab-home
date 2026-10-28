@@ -1,7 +1,7 @@
 // Aghabala Jabiyev //251ADB102
 // https://github.com/aghabalajabiyev-hash/calc-lab-home
 // Compile with: gcc -O2 -Wall -Wextra -std=c17 -o calc calc.c -lm
-// Resources used: course assignment instructions.
+// Resources used: course assignment instructions, Google to find answers for my questions.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,7 +52,7 @@ static Value make_value(double number, int is_float)
     result.is_float = is_float;
     return result;
 }
-
+// Reads a number and checks whether it is an integer or a decimal.
 static Value parse_number(Parser *p)
 {
     skip_spaces(p);
@@ -96,7 +96,7 @@ static Value parse_number(Parser *p)
     (void)start;
     return make_value(number, is_float);
 }
-
+// Reads a number or an expression inside parentheses.
 static Value parse_primary(Parser *p)
 {
     skip_spaces(p);
@@ -123,6 +123,7 @@ static Value parse_primary(Parser *p)
 
     return parse_number(p);
 }
+// Handles exponentiation and checks for invalid negative exponents.
 static Value parse_power(Parser *p);
 static Value parse_term(Parser *p)
 {
@@ -272,6 +273,8 @@ static Value parse_expression(Parser *p)
 
     return left;
 }
+
+// processes the input file, and saves the results 
 int main(int argc, char *argv[])
 {
     const char *input_name = NULL;
@@ -468,7 +471,7 @@ int main(int argc, char *argv[])
             Parser parser = {line, 0, 0, 0};
             Value result = parse_expression(&parser);
             skip_spaces(&parser);
-
+// Skips spaces and tabs before reading the next part of the expression.
             if (parser.has_error || line[parser.pos] != '\0')
             {
                 size_t local_error;
